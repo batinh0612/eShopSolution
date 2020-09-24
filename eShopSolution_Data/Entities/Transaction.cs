@@ -9,7 +9,6 @@ namespace eShopSolution.Data.Entities
     {
         public int Id { get; set; }
         public DateTime TransactionDate { get; set; }
-        public string ExternalTransactionId { get; set; }
         public decimal Amount { get; set; }
         public decimal Fee { get; set; }
         public string Result { get; set; }
@@ -19,6 +18,6 @@ namespace eShopSolution.Data.Entities
 
         public Guid UserId { get; set; }
         public AppUser AppUser { get; set; }
-
+        public string ExternalTransactionId { get; set; }
     }
 }

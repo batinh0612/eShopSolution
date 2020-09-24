@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eShopSolution.Data.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,7 +14,5 @@ namespace eShopSolution.Data.Entities
         public string Image { get; set; }
         public int SortOrder { get; set; }
         public Status Status { get; set; }
-
-
     }
 }
