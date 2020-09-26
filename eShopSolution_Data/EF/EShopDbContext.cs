@@ -1,8 +1,10 @@
 ﻿using eShopSolution.Data.Configurations;
 using eShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
 
 namespace eShopSolution.Data.EF
@@ -12,6 +14,12 @@ namespace eShopSolution.Data.EF
         public EShopDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        //connect db
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["eShopSolutionDb"].ConnectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
