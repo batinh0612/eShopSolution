@@ -96,7 +96,7 @@ namespace eShopSolution.Application.Catalog.Products
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
             if (request.CategoryIds.Count > 0)
                 query = query.Where(p => request.CategoryIds.Contains(p.pic.CategoryId));
-
+                
             //paging
             int totalRow = await query.CountAsync();
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
