@@ -10,8 +10,8 @@ using eShopSolution.Data.EF;
 namespace eShopSolution.Data.Migrations
 {
     [DbContext(typeof(EShopDbContext))]
-    [Migration("20200926150656_InitDatabase")]
-    partial class InitDatabase
+    [Migration("20201012074840_ChanFileLengType")]
+    partial class ChanFileLengType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -488,7 +488,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 9, 26, 22, 6, 55, 217, DateTimeKind.Local).AddTicks(417),
+                            CreatedDate = new DateTime(2020, 10, 12, 14, 48, 35, 733, DateTimeKind.Local).AddTicks(1600),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
