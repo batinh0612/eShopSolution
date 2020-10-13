@@ -9,3 +9,14 @@ D:\Project IT\.NET CORE\eShopSolution\eShopSolution\eShopSolution_Data\bin\Debug
 D:\Project IT\.NET CORE\eShopSolution\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.dll
 D:\Project IT\.NET CORE\eShopSolution\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.pdb
 D:\Project IT\.NET CORE\eShopSolution\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.csproj.CoreCompileInputs.cache
+E:\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.AssemblyInfoInputs.cache
+E:\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.AssemblyInfo.cs
+E:\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.csproj.CoreCompileInputs.cache
+E:\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.dll
+E:\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.pdb
+E:\eShopSolution\eShopSolution_Data\bin\Debug\netcoreapp3.1\eShopSolution.Data.deps.json
+E:\eShopSolution\eShopSolution_Data\bin\Debug\netcoreapp3.1\eShopSolution.Data.runtimeconfig.json
+E:\eShopSolution\eShopSolution_Data\bin\Debug\netcoreapp3.1\eShopSolution.Data.runtimeconfig.dev.json
+E:\eShopSolution\eShopSolution_Data\bin\Debug\netcoreapp3.1\eShopSolution.Data.dll
+E:\eShopSolution\eShopSolution_Data\bin\Debug\netcoreapp3.1\eShopSolution.Data.pdb
+E:\eShopSolution\eShopSolution_Data\obj\Debug\netcoreapp3.1\eShopSolution.Data.genruntimeconfig.cache
