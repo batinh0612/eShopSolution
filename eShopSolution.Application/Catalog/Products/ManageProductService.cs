@@ -167,24 +167,24 @@ namespace eShopSolution.Application.Catalog.Products
         /// <returns></returns>
         public async Task<int> AddImages(int productId, IFormFile files)
         {
-            var product = await _context.Products.FindAsync(productId);
-            if (product == null)
-                throw new EShopException($"Cannot find product with id {productId}");
+            //var product = await _context.Products.FindAsync(productId);
+            //if (product == null)
+            throw new EShopException($"Cannot find product with id {productId}");
 
             //Save image
-            product.ProductImages = new List<ProductImage>()
-            {
-                new ProductImage()
-                {
-                    ProductId = productId,
-                    Caption = "Thumbnail image",
-                    CreatedDate = DateTime.Now,
-                    FileSize = files.Length,
-                    ImagePath = await this.SaveFile(files),
-                    IsDefault = true,
-                    SortOrder = 2
-                }
-            };
+            //product.ProductImages = new List<ProductImage>()
+            //{
+            //    new ProductImage()
+            //    {
+            //        ProductId = productId,
+            //        Caption = "Thumbnail image",
+            //        CreatedDate = DateTime.Now,
+            //        FileSize = files.Length,
+            //        ImagePath = await this.SaveFile(files),
+            //        IsDefault = true,
+            //        SortOrder = 2
+            //    }
+            //};
 
 
         }
