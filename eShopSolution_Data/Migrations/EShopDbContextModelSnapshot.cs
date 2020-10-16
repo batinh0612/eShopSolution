@@ -486,7 +486,7 @@ namespace eShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2020, 10, 12, 14, 48, 35, 733, DateTimeKind.Local).AddTicks(1600),
+                            CreatedDate = new DateTime(2020, 10, 16, 0, 52, 11, 515, DateTimeKind.Local).AddTicks(5937),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,

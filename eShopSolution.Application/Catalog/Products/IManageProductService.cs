@@ -1,5 +1,4 @@
 ﻿using eShopSolution.ViewModels.Catalog.Products;
-using eShopSolution.ViewModels.Catalog.Products.Manage;
 using eShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
@@ -58,7 +57,7 @@ namespace eShopSolution.Application.Catalog.Products
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
         /// <summary>
         /// Add images

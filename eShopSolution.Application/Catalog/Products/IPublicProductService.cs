@@ -1,5 +1,4 @@
 ﻿using eShopSolution.ViewModels.Catalog.Products;
-using eShopSolution.ViewModels.Catalog.Products.Public;
 using eShopSolution.ViewModels.Common;
 using System;
 using System.Collections.Generic;
@@ -15,6 +14,12 @@ namespace eShopSolution.Application.Catalog.Products
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
+
+        /// <summary>
+        /// Get All
+        /// </summary>
+        /// <returns></returns>
+        Task<List<ProductViewModel>> GetAll();
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj": {}
+    "D:\\Project IT\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj": {}
   },
   "projects": {
-    "E:\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj": {
+    "D:\\Project IT\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj",
+        "projectUniqueName": "D:\\Project IT\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj",
         "projectName": "eShopSolution.Data",
-        "projectPath": "E:\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj",
-        "packagesPath": "C:\\Users\\Hanhth\\.nuget\\packages\\",
-        "outputPath": "E:\\eShopSolution\\eShopSolution_Data\\obj\\",
+        "projectPath": "D:\\Project IT\\eShopSolution\\eShopSolution_Data\\eShopSolution.Data.csproj",
+        "packagesPath": "C:\\Users\\BaTinhNguyen\\.nuget\\packages\\",
+        "outputPath": "D:\\Project IT\\eShopSolution\\eShopSolution_Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Hanhth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BaTinhNguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
