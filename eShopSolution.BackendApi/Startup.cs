@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eShopSolution.Application.Catalog.Products;
+using eShopSolution.Application.Common;
 using eShopSolution.Data.EF;
 using eShopSolution.Utilities.Constant;
 using Microsoft.AspNetCore.Builder;
@@ -39,7 +40,9 @@ namespace eShopSolution.BackendApi
                 });
             });
 
+            services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<IPublicProductService, PublicProductService>();
+            services.AddScoped<IManageProductService, ManageProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

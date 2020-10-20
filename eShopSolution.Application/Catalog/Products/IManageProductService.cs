@@ -1,4 +1,5 @@
-﻿using eShopSolution.ViewModels.Catalog.Products;
+﻿using eShopSolution.ViewModels.Catalog.ProductImages;
+using eShopSolution.ViewModels.Catalog.Products;
 using eShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
@@ -46,6 +47,14 @@ namespace eShopSolution.Application.Catalog.Products
         Task<bool> UpdateStock(int productId, int addedQuantity);
 
         /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="languageId"></param>
+        /// <returns></returns>
+        Task<ProductViewModel> GetById(int productId, string languageId);
+
+        /// <summary>
         /// Add View Count
         /// </summary>
         /// <param name="productId"></param>
@@ -60,34 +69,42 @@ namespace eShopSolution.Application.Catalog.Products
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
         /// <summary>
-        /// Add images
+        /// Add image
         /// </summary>
         /// <param name="productId"></param>
-        /// <param name="files"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
-        Task<int> AddImages(int productId, IFormFile files);
+        Task<int> AddImage(int productId, ProductImageCreateRequest request);
 
         /// <summary>
         /// Remove images
         /// </summary>
         /// <param name="imageId"></param>
+        /// <param name="productId"></param>
         /// <returns></returns>
-        Task<int> RemoveImages(int imageId);
+        Task<int> RemoveImage(int imageId);
 
         /// <summary>
         /// Update images
         /// </summary>
+        /// <param name="productId"></param>
         /// <param name="imageId"></param>
-        /// <param name="Caption"></param>
-        /// <param name="isDefault"></param>
+        /// <param name="productImageViewModel"></param>
         /// <returns></returns>
-        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
+        Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request);
 
         /// <summary>
         /// Get list image
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
-        Task<List<ProductImageViewModel>> GetListImage(int productId);
+        Task<List<ProductImageViewModel>> GetListImages(int productId);
+
+        /// <summary>
+        /// Get image by id
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <returns></returns>
+        Task<ProductImageViewModel> GetImageById(int imageId);
     }
 }
