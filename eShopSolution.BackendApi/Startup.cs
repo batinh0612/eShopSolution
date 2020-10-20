@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using eShopSolution.Application.Catalog.Products;
 using eShopSolution.Application.Common;
+using eShopSolution.Application.System.Users;
 using eShopSolution.Data.EF;
+using eShopSolution.Data.Entities;
 using eShopSolution.Utilities.Constant;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,9 +43,18 @@ namespace eShopSolution.BackendApi
                 });
             });
 
+            //add identity
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<EShopDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<IPublicProductService, PublicProductService>();
             services.AddScoped<IManageProductService, ManageProductService>();
+            services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
