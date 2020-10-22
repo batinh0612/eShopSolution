@@ -103,13 +103,12 @@ namespace eShopSolution.BackendApi
                 .AddDefaultTokenProviders();
 
             //dependency injection
-            services.AddScoped<IStorageService, StorageService>();
-            services.AddScoped<IPublicProductService, PublicProductService>();
-            services.AddScoped<IManageProductService, ManageProductService>();
-            services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
-            services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
-            services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IStorageService, StorageService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
 
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 

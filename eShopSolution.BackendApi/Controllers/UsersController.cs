@@ -12,6 +12,7 @@ namespace eShopSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -34,13 +35,20 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
             var resultToken = await _userService.Authencate(request);
+
             if (string.IsNullOrEmpty(resultToken))
             {
                 return BadRequest("Username or password is incorrect");
             }
+
             return Ok(resultToken);
         }
 
+        /// <summary>
+        /// Register
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
@@ -55,6 +63,18 @@ namespace eShopSolution.BackendApi.Controllers
                 return BadRequest("Register is successful");
             }
             return Ok();
+        }
+
+        /// <summary>
+        /// Get All Paging
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var users = await _userService.GetUsersPaging(request);
+            return Ok(users);
         }
     }
 }
