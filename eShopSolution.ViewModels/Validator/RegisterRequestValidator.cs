@@ -16,7 +16,7 @@ namespace eShopSolution.ViewModels.Validator
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last name is required")
                 .MaximumLength(200).WithMessage("Last name can not over 200 characters");
 
-            RuleFor(x => x.Dob).GreaterThan(DateTime.Now.AddDays(-100)).WithMessage("Birthday cannot greater than 100 years");
+            RuleFor(x => x.Dob).GreaterThan(DateTime.Now.AddYears(-100)).WithMessage("Birthday cannot greater than 100 years");
 
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required")
                 .Matches(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")
@@ -25,7 +25,7 @@ namespace eShopSolution.ViewModels.Validator
             RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Phone number is required");
 
             RuleFor(x => x.Username).NotEmpty().WithMessage("Username is required")
-                .MinimumLength(6).WithMessage("Username is at least 6 characters");
+                .MinimumLength(5).WithMessage("Username is at least 5 characters");
 
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required")
                 .MinimumLength(6).WithMessage("Password is at least 6 characters");
