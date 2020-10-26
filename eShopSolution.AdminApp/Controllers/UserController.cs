@@ -29,7 +29,7 @@ namespace eShopSolution.AdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 3)
         {
             var request = new GetUserPagingRequest()
             {
@@ -37,6 +37,13 @@ namespace eShopSolution.AdminApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
+
+            ViewBag.Keyword = keyword;
+
+            if (TempData["result"] != null)
+            {
+                ViewBag.Success = TempData["result"];
+            }
 
             var data = await _userApiClient.GetUsersPaging(request);
 
@@ -58,7 +65,11 @@ namespace eShopSolution.AdminApp.Controllers
             var result = await _userApiClient.RegisterUser(request);
 
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Thêm mới người dùng thành công";
                 return RedirectToAction("Index", "User");
+            }
+                
 
             ModelState.AddModelError("", result.Message);
 
@@ -106,10 +117,13 @@ namespace eShopSolution.AdminApp.Controllers
 
             var result = await _userApiClient.DeleteUser(request.Id);
 
-            if (!result.IsSuccessed)
-                return RedirectToAction("Error", "Home");
-
-            return RedirectToAction("Index", "User");
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Xóa người dùng thành công";
+                return RedirectToAction("Index", "User");
+            }
+                
+            return RedirectToAction("Error", "Home");
         }
 
         [HttpPost]
@@ -120,8 +134,11 @@ namespace eShopSolution.AdminApp.Controllers
 
             var result = await _userApiClient.UpdateUser(request.Id, request);
             if (result.IsSuccessed)
+            {
+                TempData["result"] = "Cập nhật người dùng thành công";
                 return RedirectToAction("Index");
-
+            }
+                
             ModelState.AddModelError("", result.Message);
 
             return View(request);

@@ -70,8 +70,10 @@ namespace eShopSolution.Application.Catalog.Products
             //select and projection
             var pagedResult = new PagedResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
-                Items = data
+                TotalRecords = totalRow,
+                Items = data,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex
             };
 
             return pagedResult;
@@ -462,8 +464,10 @@ namespace eShopSolution.Application.Catalog.Products
             //select and projection
             var pagedResult = new PagedResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
-                Items = data
+                TotalRecords = totalRow,
+                Items = data,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize
             };
 
             return pagedResult;

@@ -41,11 +41,11 @@ namespace eShopSolution.Application.System.Users
         {
             var user = await _userManager.FindByNameAsync(request.Username);
             if (user == null) 
-                return new ApiSuccessResult<string>("Tài khoản không chính xác");
+                return new ApiErrorResult<string>("Tài khoản không chính xác");
 
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
-                return new ApiSuccessResult<string>("Mật khẩu không chính xác");
+                return new ApiErrorResult<string>("Mật khẩu không chính xác");
 
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
@@ -111,6 +111,9 @@ namespace eShopSolution.Application.System.Users
             if (!string.IsNullOrEmpty(request.Keyword))
             {
                 query = query.Where(x => x.UserName.Contains(request.Keyword) ||
+                x.FirstName.Contains(request.Keyword) || 
+                x.LastName.Contains(request.Keyword) ||
+                x.Email.Contains(request.Keyword) ||
                 x.PhoneNumber.Contains(request.Keyword));
             }
 
@@ -131,8 +134,10 @@ namespace eShopSolution.Application.System.Users
 
             var pagedResult = new PagedResult<UserViewModel>()
             {
-                TotalRecord = totalRow,
-                Items = data
+                TotalRecords = totalRow,
+                Items = data,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize
             };
 
             return new ApiSuccessResult<PagedResult<UserViewModel>>(pagedResult);
