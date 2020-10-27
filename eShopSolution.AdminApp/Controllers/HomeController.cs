@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using eShopSolution.AdminApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using eShopSolution.Utilities.Constant;
 
 namespace eShopSolution.AdminApp.Controllers
 {
@@ -24,6 +26,14 @@ namespace eShopSolution.AdminApp.Controllers
         {
             //get username login
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Language(NavigationViewModel viewModel)
+        {
+            HttpContext.Session.SetString(SystemConstant.AppSettings.DefaultLanguageId, viewModel.CurrentLanguageId);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
