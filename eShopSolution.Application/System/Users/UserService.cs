@@ -185,6 +185,8 @@ namespace eShopSolution.Application.System.Users
             if (user == null)
                 return new ApiErrorResult<UserViewModel>("Người dùng không tồn tại");
 
+            var roles = await _userManager.GetRolesAsync(user);
+
             var userModel = new UserViewModel()
             {
                 Email = user.Email,
@@ -193,7 +195,8 @@ namespace eShopSolution.Application.System.Users
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
                 UserName = user.UserName,
-                Dob = user.Dob
+                Dob = user.Dob,
+                Roles = roles
             };
 
             return new ApiSuccessResult<UserViewModel>(userModel);
@@ -215,6 +218,41 @@ namespace eShopSolution.Application.System.Users
 
             if (!result.Succeeded)
                 return new ApiErrorResult<bool>("Xóa người dùng thất bại");
+
+            return new ApiSuccessResult<bool>();
+        }
+
+        /// <summary>
+        /// Role assign
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>("Tài khoản không tồn tại");
+            }
+            var removedRoles = request.Roles.Where(x => x.Selected == false).Select(x => x.Name).ToList();
+            foreach (var roleName in removedRoles)
+            {
+                if (await _userManager.IsInRoleAsync(user, roleName) == true)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, roleName);
+                }
+            }
+            await _userManager.RemoveFromRolesAsync(user, removedRoles);
+
+            var addedRoles = request.Roles.Where(x => x.Selected).Select(x => x.Name).ToList();
+            foreach (var roleName in addedRoles)
+            {
+                if (await _userManager.IsInRoleAsync(user, roleName) == false)
+                {
+                    await _userManager.AddToRoleAsync(user, roleName);
+                }
+            }
 
             return new ApiSuccessResult<bool>();
         }
