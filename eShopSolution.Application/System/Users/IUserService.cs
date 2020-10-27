@@ -52,5 +52,13 @@ namespace eShopSolution.Application.System.Users
         /// <returns></returns>
         Task<ApiResult<UserViewModel>> GetById(Guid id);
 
+        /// <summary>
+        /// Role assign
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
+
     }
 }
