@@ -5,6 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts{
+
+    <script src="~/js/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}
+
 <div class="container-fluid">
     <h1 class="mt-4">Thêm mới sản phẩm</h1>
     <ol class="breadcrumb mb-4">
@@ -16,7 +33,7 @@
             <a class="btn btn-success" asp-action="Index" asp-controller="Product">Về danh sách</a>
         </div>
         <div class="card-body">
-            <div class="col-md-5">
+            <div class="col-md-8">
                 <form asp-action="Create" asp-controller="Product" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -26,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Price" class="control-label"></label>
-                        <input asp-for="Price" type="number" min="0"  class="form-control" />
+                        <input asp-for="Price" type="number" min="0" class="form-control" />
                         <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -46,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Details" class="control-label"></label>
-                        <textarea asp-for="Details" rows="5" class="form-control"></textarea>
+                        <textarea id="editor" asp-for="Details" rows="20" class="form-control"></textarea>
                         <span asp-validation-for="Details" class="text-danger"></span>
                     </div>
                     <div class="form-group">
