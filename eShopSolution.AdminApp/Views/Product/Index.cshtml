@@ -16,7 +16,7 @@
 }
 
 <div class="container-fluid">
-    <h1 class="mt-4">Danh sách người dùng</h1>
+    <h1 class="mt-4">Danh sách sản phẩm</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
         <li class="breadcrumb-item active">Danh sách sản phẩm</li>
@@ -24,16 +24,21 @@
     <div class="card mb-12">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <a class="btn btn-success" asp-action="Create" asp-controller="Product">Tạo mới</a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <form asp-action="Index" method="get">
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-3">
                                 <input type="text" value="@ViewBag.Keyword" placeholder="Tìm kiếm..." name="keyword" class="form-control" />
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
+                                <select onchange="this.form.submit()" class=" form-control" name="categoryId" asp-items="@ViewBag.Categories">
+                                    <option>--Chọn danh mục--</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                 <button type="button" class="btn btn-dark" onclick="window.location.href='/Product/Index'">Reset</button>
                             </div>
