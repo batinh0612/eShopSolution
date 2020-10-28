@@ -18,7 +18,7 @@ namespace eShopSolution.ViewModels.Common
             {
                 var pageCount = (double)TotalRecords / PageSize;
                 return (int)Math.Ceiling(pageCount);
-            }
+            }   
         }
     }
 }

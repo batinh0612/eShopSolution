@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eShopSolution.BackendApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _manageProductService;
@@ -29,11 +29,10 @@ namespace eShopSolution.BackendApi.Controllers
         /// <param name="languageId"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        //http://localhost:port/products/pageIndex=1&pageSize=10&categoryId=
-        [HttpGet("public-paging/{languageId}")]
-        public async Task<IActionResult> GetAllPaging(string languageId ,[FromQuery] GetPublicProductPagingRequest request)
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetManageProductPagingRequest request)
         {
-            var products = await _manageProductService.GetAllByCategoryId(languageId ,request);
+            var products = await _manageProductService.GetAllPaging(request);
             return Ok(products);
         }
 
@@ -42,7 +41,6 @@ namespace eShopSolution.BackendApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //http://localhost:port/product/
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
         {
@@ -61,6 +59,7 @@ namespace eShopSolution.BackendApi.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [Consumes("multipart/form-data")]//cho phep nhan kieu du lieu truyen len la form-data
         public async Task<IActionResult> Create([FromForm]ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -153,6 +152,12 @@ namespace eShopSolution.BackendApi.Controllers
             return CreatedAtAction(nameof(GetImageById), new { id = imageId }, image);
         }
 
+        /// <summary>
+        /// Get image by id
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="imageId"></param>
+        /// <returns></returns>
         [HttpGet("{productId}/image/{imageId}")]
         public async Task<IActionResult> GetImageById(int productId, int imageId)
         {
@@ -164,6 +169,12 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(image);
         }
 
+        /// <summary>
+        /// Update image
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("{productId}/images")]
         public async Task<IActionResult> UpdateImage(int imageId, [FromForm]ProductImageUpdateRequest request)
         {
@@ -178,6 +189,11 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Remove image
+        /// </summary>
+        /// <param name="imageId"></param>
+        /// <returns></returns>
         [HttpPost("{productId}/image/imageId")]
         public async Task<IActionResult> RemoveImage(int imageId)
         {
@@ -189,6 +205,11 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// List image
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         [HttpGet("images/{productId}")]
         public async Task<IActionResult> ListImage(int productId)
         {
