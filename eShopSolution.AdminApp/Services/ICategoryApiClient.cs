@@ -14,6 +14,6 @@ namespace eShopSolution.AdminApp.Services
         /// </summary>
         /// <param name="languageId"></param>
         /// <returns></returns>
-        Task<ApiResult<List<CategoryViewModel>>> GetAll(string languageId);
+        Task<List<CategoryViewModel>> GetAll(string languageId);
     }
 }

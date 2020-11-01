@@ -22,5 +22,21 @@ namespace eShopSolution.AdminApp.Services
         /// <param name="request"></param>
         /// <returns></returns>
         Task<bool> Create(ProductCreateRequest request);
+
+        /// <summary>
+        /// Assign category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<ApiResult<bool>> AssignCategory(int id, CategoryAssignRequest request);
+
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="languageId"></param>
+        /// <returns></returns>
+        Task<ProductViewModel> GetById(int id, string languageId);
     }
 }

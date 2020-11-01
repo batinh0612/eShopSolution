@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eShopSolution.AdminApp.Services;
 using eShopSolution.Utilities.Constant;
 using eShopSolution.ViewModels.Catalog.Products;
+using eShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,7 +26,7 @@ namespace eShopSolution.AdminApp.Controllers
             _categoryApiClient = categoryApiClient;
         }
 
-        public async Task<IActionResult> Index(string keyword, int? categoryId, int pageIndex = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(string keyword, int? categoryId, int pageIndex = 1, int pageSize = 10)
         {
             var languageId = HttpContext.Session.GetString(SystemConstant.AppSettings.DefaultLanguageId);
 
@@ -47,7 +48,7 @@ namespace eShopSolution.AdminApp.Controllers
 
             var categories = await _categoryApiClient.GetAll(languageId);
 
-            ViewBag.Categories = categories.ResultObj.Select(x => new SelectListItem() { 
+            ViewBag.Categories = categories.Select(x => new SelectListItem() { 
                 Text = x.Name,
                 Value = x.Id.ToString(),
                 Selected = categoryId.HasValue && categoryId.Value == x.Id
@@ -82,6 +83,72 @@ namespace eShopSolution.AdminApp.Controllers
             ModelState.AddModelError("", "Thêm sản phẩm thất bại");
 
             return View(request);
+        }
+
+        /// <summary>
+        /// Role assign
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> AssignCategory(int id)
+        {
+            var categoryAssignRequest = await GetCategoryAssignRequest(id);
+
+            return View(categoryAssignRequest);
+        }
+
+        /// <summary>
+        /// Role assign
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> AssignCategory(CategoryAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _productApiClient.AssignCategory(request.Id, request);
+
+            var roleAssignRequest = await GetCategoryAssignRequest(request.Id);
+
+            if (result.IsSuccessed)
+            {
+                TempData["result"] = "Cập nhật danh mục thành công";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", result.Message);
+
+            return View(roleAssignRequest);
+        }
+
+        /// <summary>
+        /// GetRoleAssignRequest
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<CategoryAssignRequest> GetCategoryAssignRequest(int id)
+        {
+            var languageId = HttpContext.Session.GetString(SystemConstant.AppSettings.DefaultLanguageId);
+
+            var productObj = await _productApiClient.GetById(id, languageId);
+
+            var categories = await _categoryApiClient.GetAll(languageId);
+            
+            var categoryAssignRequest = new CategoryAssignRequest();
+
+            foreach (var category in categories)
+            {
+                categoryAssignRequest.Categories.Add(new SelectedItem()
+                {
+                    Id = category.Id.ToString(),
+                    Name = category.Name,
+                    Selected = productObj.Categories.Contains(category.Name)
+                });
+            }
+            return categoryAssignRequest;
         }
     }
 }

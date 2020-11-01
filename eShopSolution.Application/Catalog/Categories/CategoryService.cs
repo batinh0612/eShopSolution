@@ -23,7 +23,7 @@ namespace eShopSolution.Application.Catalog.Categories
         /// Get all paging
         /// </summary>
         /// <returns></returns>
-        public async Task<ApiResult<List<CategoryViewModel>>> GetAllPaging(string languageId)
+        public async Task<List<CategoryViewModel>> GetAllPaging(string languageId)
         {
             var query = from c in _context.Categories
                         join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
@@ -35,7 +35,7 @@ namespace eShopSolution.Application.Catalog.Categories
                 Name = x.ct.Name
             }).ToListAsync();
 
-            return new ApiSuccessResult<List<CategoryViewModel>>(listCategories);
+            return listCategories;
         }
     }
 }
