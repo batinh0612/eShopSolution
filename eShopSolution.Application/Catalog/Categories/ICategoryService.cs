@@ -13,6 +13,6 @@ namespace eShopSolution.Application.Catalog.Categories
         /// Get all paging
         /// </summary>
         /// <returns></returns>
-        Task<ApiResult<List<CategoryViewModel>>> GetAllPaging(string languageId);
+        Task<List<CategoryViewModel>> GetAllPaging(string languageId);
     }
 }

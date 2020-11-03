@@ -113,5 +113,13 @@ namespace eShopSolution.Application.Catalog.Products
         /// <param name="request"></param>
         /// <returns></returns>
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
+
+        /// <summary>
+        /// Assign category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<ApiResult<bool>> AssignCategory(int id, CategoryAssignRequest request);
     }
 }

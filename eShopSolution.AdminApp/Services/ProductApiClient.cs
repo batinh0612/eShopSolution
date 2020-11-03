@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace eShopSolution.AdminApp.Services
@@ -25,6 +26,31 @@ namespace eShopSolution.AdminApp.Services
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        /// <summary>
+        /// Assign category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<ApiResult<bool>> AssignCategory(int id, CategoryAssignRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"/api/products/{id}/category", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
         /// <summary>
@@ -66,6 +92,16 @@ namespace eShopSolution.AdminApp.Services
 
             var response = await client.PostAsync($"/api/products/", requestContent);
             return response.IsSuccessStatusCode;
+        }
+
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="languageId"></param>
+        public async Task<ProductViewModel> GetById(int id, string languageId)
+        {
+            return await GetAsync<ProductViewModel>($"/api/products/{id}/{languageId}");
         }
 
         /// <summary>

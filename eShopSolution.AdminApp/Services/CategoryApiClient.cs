@@ -22,9 +22,9 @@ namespace eShopSolution.AdminApp.Services
         /// </summary>
         /// <param name="languageId"></param>
         /// <returns></returns>
-        public async Task<ApiResult<List<CategoryViewModel>>> GetAll(string languageId)
+        public async Task<List<CategoryViewModel>> GetAll(string languageId)
         {
-            return await GetAsync<ApiResult<List<CategoryViewModel>>>($"/api/categories?languageId={languageId}");
+            return await GetAsync<List<CategoryViewModel>>($"/api/categories?languageId={languageId}");
         }
     }
 }

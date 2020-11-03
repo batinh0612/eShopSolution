@@ -152,6 +152,7 @@ namespace eShopSolution.BackendApi
 
             app.UseAuthentication();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
