@@ -230,5 +230,21 @@ namespace eShopSolution.BackendApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("featured/{languageId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetFeaturedProducts(string languageId)
+        {
+            var products = await _manageProductService.GetFeaturedProducts(languageId);
+            return Ok(products);
+        }
+
+        [HttpGet("latest/{languageId}/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetLatestProducts(int take, string languageId)
+        {
+            var products = await _manageProductService.GetLatestProducts(languageId, take);
+            return Ok(products);
+        }
     }
 }

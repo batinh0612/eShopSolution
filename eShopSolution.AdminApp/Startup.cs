@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using eShopSolution.AdminApp.Services;
+using eShopSolution.ApiIntergration;
 using eShopSolution.ViewModels.Validator;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -33,12 +33,13 @@ namespace eShopSolution.AdminApp
             services.AddHttpClient();
 
             //Khi khong co quyen
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
                 options.LoginPath = "/Login/Index/";
                 options.AccessDeniedPath = "/User/Forbidden/";
             });
 
-            
+
 
             var mvcBuilder = services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 

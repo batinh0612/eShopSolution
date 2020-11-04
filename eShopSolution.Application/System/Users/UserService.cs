@@ -24,7 +24,7 @@ namespace eShopSolution.Application.System.Users
         private readonly IConfiguration _config;
 
 
-        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager,  IConfiguration config)
+        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -40,10 +40,10 @@ namespace eShopSolution.Application.System.Users
         public async Task<ApiResult<string>> Authencate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.Username);
-            if (user == null) 
+            if (user == null)
                 return new ApiErrorResult<string>("Tài khoản không chính xác");
 
-            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, false);
             if (!result.Succeeded)
                 return new ApiErrorResult<string>("Mật khẩu không chính xác");
 
@@ -111,7 +111,7 @@ namespace eShopSolution.Application.System.Users
             if (!string.IsNullOrEmpty(request.Keyword))
             {
                 query = query.Where(x => x.UserName.Contains(request.Keyword) ||
-                x.FirstName.Contains(request.Keyword) || 
+                x.FirstName.Contains(request.Keyword) ||
                 x.LastName.Contains(request.Keyword) ||
                 x.Email.Contains(request.Keyword) ||
                 x.PhoneNumber.Contains(request.Keyword));
