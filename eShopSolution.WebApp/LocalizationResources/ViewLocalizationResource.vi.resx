@@ -161,6 +161,9 @@
     <value>Đăng nhập</value>
     <comment>_Layout</comment>
   </data>
+  <data name="Page" xml:space="preserve">
+    <value>trang</value>
+  </data>
   <data name="Product name" xml:space="preserve">
     <value>Tên sản phẩm</value>
     <comment>_Layout</comment>
@@ -180,6 +183,9 @@
   <data name="VIEW" xml:space="preserve">
     <value>Lượt xem</value>
     <comment>/Home/Index</comment>
+  </data>
+  <data name="View Details" xml:space="preserve">
+    <value>Xem chi tiết</value>
   </data>
   <data name="Welcome!" xml:space="preserve">
     <value>Chào mừng!</value>

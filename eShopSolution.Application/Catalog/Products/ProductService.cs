@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using System.IO;
 using eShopSolution.Application.Common;
 using eShopSolution.ViewModels.Catalog.ProductImages;
+using eShopSolution.Utilities.Constant;
 
 namespace eShopSolution.Application.Catalog.Products
 {
@@ -35,13 +36,17 @@ namespace eShopSolution.Application.Catalog.Products
         {
             //select join
             var query = from p in _context.Products
+                        join pi in _context.ProductImages on p.Id equals pi.ProductId into pii 
+                        from pi in pii.DefaultIfEmpty()
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId
-                        into ppic from pic in ppic.DefaultIfEmpty()//left join
+                        into ppic
+                        from pic in ppic.DefaultIfEmpty()//left join
                         join c in _context.Categories on pic.CategoryId equals c.Id
-                        into picc from c in picc.DefaultIfEmpty()//left join
-                        where pt.LanguageId == request.LanguageId
-                        select new { p, pt, pic};
+                        into picc
+                        from c in picc.DefaultIfEmpty()//left join
+                        where pt.LanguageId == request.LanguageId && pi.IsDefault == true
+                        select new { p, pt, pic, pi };
             //filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
@@ -67,7 +72,8 @@ namespace eShopSolution.Application.Catalog.Products
                     SeoDescription = x.pt.SeoDescription,
                     SeoTitle = x.pt.SeoTitle,
                     Stock = x.p.Stock,
-                    ViewCount = x.p.ViewCount
+                    ViewCount = x.p.ViewCount,
+                    ThumbnailImage = x.pi.ImagePath
                 }).ToListAsync();
 
             //select and projection
@@ -139,16 +145,13 @@ namespace eShopSolution.Application.Catalog.Products
         /// <returns></returns>
         public async Task<int> Create(ProductCreateRequest request)
         {
-            var product = new Product()
+            var languages = _context.Languages;
+            var translations = new List<ProductTranslation>();
+            foreach (var language in languages)
             {
-                Price = request.Price,
-                OriginalPrice = request.OriginalPrice,
-                Stock = request.Stock,
-                ViewCount = 0,
-                CreatedDate = DateTime.Now,
-                ProductTranslations = new List<ProductTranslation>()
+                if (language.Id == request.LanguageId)
                 {
-                    new ProductTranslation()
+                    translations.Add(new ProductTranslation()
                     {
                         Name = request.Name,
                         Description = request.Description,
@@ -157,8 +160,29 @@ namespace eShopSolution.Application.Catalog.Products
                         SeoAlias = request.SeoAlias,
                         SeoTitle = request.SeoTitle,
                         LanguageId = request.LanguageId
-                    }
+                    });
                 }
+                else
+                {
+                    translations.Add(new ProductTranslation()
+                    {
+                        Name = SystemConstant.ProductSettings.NA,
+                        Description = SystemConstant.ProductSettings.NA,
+                        SeoAlias = SystemConstant.ProductSettings.NA,
+                        LanguageId = language.Id
+                    });
+                }
+            }
+
+            var product = new Product()
+            {
+                Price = request.Price,
+                OriginalPrice = request.OriginalPrice,
+                Stock = request.Stock,
+                ViewCount = 0,
+                CreatedDate = DateTime.Now,
+                ProductTranslations = translations,
+                IsFeatured = true
             };
 
             //Save image
@@ -179,6 +203,7 @@ namespace eShopSolution.Application.Catalog.Products
             }
 
             _context.Products.Add(product);
+
             await _context.SaveChangesAsync();
 
             return product.Id;
@@ -490,9 +515,10 @@ namespace eShopSolution.Application.Catalog.Products
                 {
                     _context.ProductInCategories.Remove(productInCategory);
                 }
-                else if(productInCategory == null && category.Selected == true)
+                else if (productInCategory == null && category.Selected == true)
                 {
-                    await _context.ProductInCategories.AddAsync(new ProductInCategory() { 
+                    await _context.ProductInCategories.AddAsync(new ProductInCategory()
+                    {
                         CategoryId = int.Parse(category.Id),
                         ProductId = id
                     });

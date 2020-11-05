@@ -157,6 +157,9 @@
     <value>Login</value>
     <comment>_Layout</comment>
   </data>
+  <data name="Page" xml:space="preserve">
+    <value>page</value>
+  </data>
   <data name="Product name" xml:space="preserve">
     <value>Product name</value>
     <comment>_Layout</comment>
@@ -169,6 +172,9 @@
     <value>Specials Offer</value>
     <comment>_Layout</comment>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Vietnamese" xml:space="preserve">
     <value>Vietnamese</value>
     <comment>_Layout</comment>
@@ -176,6 +182,9 @@
   <data name="VIEW" xml:space="preserve">
     <value>VIEW</value>
     <comment>Home/Index</comment>
+  </data>
+  <data name="View Details" xml:space="preserve">
+    <value>View Details</value>
   </data>
   <data name="Welcome!" xml:space="preserve">
     <value>Welcome!</value>

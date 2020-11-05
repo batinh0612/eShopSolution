@@ -95,6 +95,50 @@ namespace eShopSolution.ApiIntergration
         }
 
         /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<bool> Update(ProductUpdateRequest request)
+        {
+            var sessions = _httpContextAccessor
+                .HttpContext
+                .Session
+                .GetString(SystemConstant.AppSettings.Token);
+
+            var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstant.AppSettings.DefaultLanguageId);
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration[SystemConstant.AppSettings.BaseAddress]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var requestContent = new MultipartFormDataContent();
+
+            if (request.ThumnailImage != null)
+            {
+                byte[] data;
+                using (var br = new BinaryReader(request.ThumnailImage.OpenReadStream()))
+                {
+                    data = br.ReadBytes((int)request.ThumnailImage.OpenReadStream().Length);
+                }
+                ByteArrayContent bytes = new ByteArrayContent(data);
+                requestContent.Add(bytes, "thumnailImage", request.ThumnailImage.FileName);
+            }
+
+            //requestContent.Add(new StringContent(request.Id.ToString()), "id");
+            requestContent.Add(new StringContent(request.Name), "name");
+            requestContent.Add(new StringContent(request.Description), "description");
+            requestContent.Add(new StringContent(request.Details), "details");
+            requestContent.Add(new StringContent(request.SeoDescription), "seoDescription");
+            requestContent.Add(new StringContent(request.SeoTitle), "seoTitle");
+            requestContent.Add(new StringContent(request.SeoAlias), "seoAlias");
+            requestContent.Add(new StringContent(languageId), "languageId");
+
+            var response = await client.PutAsync($"/api/products/"+request.Id, requestContent);
+            return response.IsSuccessStatusCode;
+        }
+
+        /// <summary>
         /// Get by id
         /// </summary>
         /// <param name="id"></param>

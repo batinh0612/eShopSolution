@@ -15,5 +15,13 @@ namespace eShopSolution.ApiIntergration
         /// <param name="languageId"></param>
         /// <returns></returns>
         Task<List<CategoryViewModel>> GetAll(string languageId);
+
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<CategoryViewModel> GetById(string languageId, int id);
     }
 }

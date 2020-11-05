@@ -91,10 +91,9 @@
                                     @Html.DisplayFor(x => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(x => item.OriginalPrice)
+                                    @item.OriginalPrice.ToString("N0")
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(x => item.Price)
                                     @item.Price.ToString("N0")
                                 </td>
                                 <td>

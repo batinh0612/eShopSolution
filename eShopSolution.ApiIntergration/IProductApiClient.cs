@@ -24,6 +24,13 @@ namespace eShopSolution.ApiIntergration
         Task<bool> Create(ProductCreateRequest request);
 
         /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<bool> Update(ProductUpdateRequest request);
+
+        /// <summary>
         /// Assign category
         /// </summary>
         /// <param name="id"></param>

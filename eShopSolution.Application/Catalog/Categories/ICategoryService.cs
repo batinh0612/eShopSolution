@@ -14,5 +14,13 @@ namespace eShopSolution.Application.Catalog.Categories
         /// </summary>
         /// <returns></returns>
         Task<List<CategoryViewModel>> GetAllPaging(string languageId);
+
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<CategoryViewModel> GetById(string languageId, int id);
     }
 }

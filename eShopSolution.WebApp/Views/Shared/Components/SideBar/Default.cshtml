@@ -2,7 +2,7 @@
 @model List<CategoryViewModel>
 @inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
 @{ 
-    var culture = CultureInfo.CurrentCulture.Name;
+    var culture = CultureInfo.CurrentCulture;
 }
 
 <div id="sidebar" class="span3">
@@ -22,14 +22,14 @@
                     <ul>
                         @foreach (var item in children)
                         {
-                            <li><a class="active" href="/@culture/@_loc["categoryUrl"]/@item.Id"><i class="icon-chevron-right"></i>@item.Name (100) </a></li>
+                            <li><a class="active" href="/@culture.Name/@_loc["categoryUrl"]/@item.Id"><i class="icon-chevron-right"></i>@item.Name (100) </a></li>
                         }
                     </ul>
                 </li>
             }
             else
             {
-                <li><a href="/@culture/@_loc["categoryUrl"]/@parent.Id">@parent.Name</a></li>
+                <li><a href="/@culture.Name/@_loc["categoryUrl"]/@parent.Id">@parent.Name</a></li>
             }
         }
 
