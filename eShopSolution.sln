@@ -26,7 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{C6600CE3-B89F-4CAD-B6EB-D62B3658FD81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.AdminApp", "eShopSolution.AdminApp\eShopSolution.AdminApp.csproj", "{443F752F-5F17-4E17-B2D1-D1A23C4BA595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.AdminApp", "eShopSolution.AdminApp\eShopSolution.AdminApp.csproj", "{443F752F-5F17-4E17-B2D1-D1A23C4BA595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.ApiIntergration", "eShopSolution.ApiIntergration\eShopSolution.ApiIntergration.csproj", "{7FF6AAAF-96A9-4AFD-A771-443E4F92777A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{443F752F-5F17-4E17-B2D1-D1A23C4BA595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{443F752F-5F17-4E17-B2D1-D1A23C4BA595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{443F752F-5F17-4E17-B2D1-D1A23C4BA595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF6AAAF-96A9-4AFD-A771-443E4F92777A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF6AAAF-96A9-4AFD-A771-443E4F92777A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF6AAAF-96A9-4AFD-A771-443E4F92777A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF6AAAF-96A9-4AFD-A771-443E4F92777A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{D463EF53-02A9-476A-8936-A94214C2B422} = {8A555E73-5D7F-47D2-9EF7-50DE8C200D83}
 		{3FFDA2D5-6AE5-49F4-B45C-DCE4759D33B1} = {C6600CE3-B89F-4CAD-B6EB-D62B3658FD81}
 		{443F752F-5F17-4E17-B2D1-D1A23C4BA595} = {C6600CE3-B89F-4CAD-B6EB-D62B3658FD81}
+		{7FF6AAAF-96A9-4AFD-A771-443E4F92777A} = {C6600CE3-B89F-4CAD-B6EB-D62B3658FD81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86B30168-3994-4031-99B6-5E57B89A92B9}

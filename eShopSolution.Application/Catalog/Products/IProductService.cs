@@ -113,5 +113,29 @@ namespace eShopSolution.Application.Catalog.Products
         /// <param name="request"></param>
         /// <returns></returns>
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
+
+        /// <summary>
+        /// Assign category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<ApiResult<bool>> AssignCategory(int id, CategoryAssignRequest request);
+
+        /// <summary>
+        /// Get featured products
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <param name="take"></param>
+        /// <returns></returns>
+        Task<List<ProductViewModel>> GetFeaturedProducts(string languageId);
+
+        /// <summary>
+        /// Get latest products
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <param name="take"></param>
+        /// <returns></returns>
+        Task<List<ProductViewModel>> GetLatestProducts(string languageId, int take);
     }
 }

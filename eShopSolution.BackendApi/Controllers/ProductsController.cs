@@ -41,10 +41,10 @@ namespace eShopSolution.BackendApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{productId}/{languageId}")]
-        public async Task<IActionResult> GetById(int productId, string languageId)
+        [HttpGet("{id}/{languageId}")]
+        public async Task<IActionResult> GetById(int id, string languageId)
         {
-            var product = await _manageProductService.GetById(productId, languageId);
+            var product = await _manageProductService.GetById(id, languageId);
             if (product == null)
             {
                 return BadRequest("Cannot find product");
@@ -82,13 +82,16 @@ namespace eShopSolution.BackendApi.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
+        [HttpPut("{id}")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            request.Id = id;
+
             var affectedResult = await _manageProductService.Update(request);
             if (affectedResult == 0)
             {
@@ -215,6 +218,36 @@ namespace eShopSolution.BackendApi.Controllers
         {
             var listImages = await _manageProductService.GetListImages(productId);
             return Ok(listImages);
+        }
+
+        [HttpPut("{id}/category")]
+        public async Task<IActionResult> AssignCategory(int id, [FromBody] CategoryAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _manageProductService.AssignCategory(id, request);
+
+            if (!result.IsSuccessed)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpGet("featured/{languageId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetFeaturedProducts(string languageId)
+        {
+            var products = await _manageProductService.GetFeaturedProducts(languageId);
+            return Ok(products);
+        }
+
+        [HttpGet("latest/{languageId}/{take}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetLatestProducts(int take, string languageId)
+        {
+            var products = await _manageProductService.GetLatestProducts(languageId, take);
+            return Ok(products);
         }
     }
 }
